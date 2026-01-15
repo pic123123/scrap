@@ -197,27 +197,30 @@ def extract_with_llm(state: GraphState) -> GraphState:
     {state['clean_text']}
     
     Extract the following fields into a valid JSON object matching the schema below.
-    EXTRACT EVERYTHING YOU CAN FIND. Do not summarize unless asked.
     
-    IMPORTANT: For 'full_description', provide a SHORT summary (max 200 chars). Do NOT output long text.
-    Focus on extracting the distinct IMAGE lists from the headers provided.
+    CRITICAL INSTRUCTION: 
+    The input text contains auto-translated Korean which sounds unnatural.
+    You MUST REWRITE all text fields (title, features, description, etc.) into NATURAL, PROFESSIONAL NATIVE KOREAN (자연스러운 한국어).
+    - Remove "translationese" (번역투 제거).
+    - Use a professional e-commerce tone suitable for a Korean shopping mall.
+    - Improve sentence structure and vocabulary for readability.
     
     fields:
-    - title (string)
+    - title (string, Rewrite to be concise and natural in Korean)
     - asin (string, look for "ASIN" in details)
     - price (string, with currency)
     - currency (string, ISO code)
     - rating (string)
     - review_count (int or string)
-    - availability (string)
+    - availability (string, e.g., "재고 있음")
     - brand (string)
     - model_name (string)
     - breadcrumbs (list of strings, category path)
-    - features (list of strings, ALL bullet points from "About this item")
-    - specifications (dictionary of key-value pairs from "Product Information" or "Specs" table)
-    - full_description (string, SUMMARY ONLY. Max 200 chars.)
+    - features (list of strings, Rewrite bullet points to be natural and persuasive)
+    - specifications (dictionary of key-value pairs, Translate keys/values to natural Korean)
+    - full_description (string, SUMMARY ONLY. Max 200 chars. Natural Korean summary.)
     - product_details (dictionary of other details)
-    - description_summary (brief summary)
+    - description_summary (brief summary in natural Korean)
     - best_sellers_rank (list of strings)
     - warranty_info (string)
     - image_url (string, Main Product Image)
