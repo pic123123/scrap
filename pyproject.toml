@@ -1,0 +1,23 @@
+[project]
+name = "amazon-crawler-api"
+version = "0.1.0"
+description = "Amazon Product Crawler using FastAPI, LangGraph, Playwright, and AWS Bedrock"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "langgraph",
+    "langchain-aws",
+    "langchain-core",
+    "boto3",
+    "beautifulsoup4",
+    "requests",
+    "fake-useragent",
+    "pydantic",
+    "python-dotenv",
+    "playwright"
+]
+
+[tool.uv]
+package = true

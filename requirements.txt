@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+langgraph
+langchain-aws
+langchain-core
+boto3
+beautifulsoup4
+requests
+fake-useragent
+pydantic
+python-dotenv
+playwright
