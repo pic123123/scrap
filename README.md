@@ -20,7 +20,11 @@
     *   **번역투 제거**: LLM이 기계 번역된 텍스트를 "사람이 쓴 듯한 자연스러운 한국어"로 재작성합니다.
     *   **요약 및 정제**: 긴 설명글을 핵심만 요약하여 가독성을 높입니다.
 
-3.  **초저비용 고효율 (Cost Effective)** 💰
+3.  **다중 URL 동시 처리 (Multi-URL Support)** ⚡
+    *   **병렬 처리**: 여러 개의 아마존 URL을 동시에 입력받아 병렬적으로 크롤링을 수행합니다.
+    *   **고속 실행**: `asyncio.gather`를 활용하여 다수의 상품 정보를 매우 빠른 속도로 한 번에 수집합니다.
+
+4.  **초저비용 고효율 (Cost Effective)** 💰
     *   **Claude 3 Haiku** 모델을 최적화하여 사용.
     *   **1회 요청 당 약 7원 미만** ($0.005 USD)의 압도적인 가성비를 자랑합니다.
     *   불필요한 HTML 노이즈를 제거하여 토큰 비용을 최소화했습니다.
@@ -64,38 +68,49 @@ uv run run.py
 **Request Example:**
 ```json
 {
-  "url": "https://www.amazon.com/dp/B00FLYWNYQ" 
+  "urls": [
+    "https://www.amazon.com/dp/B00FLYWNYQ",
+    "https://www.amazon.com/dp/B00GJ82VK4",
+    "https://www.amazon.com/-/ko/dp/B00FLYWNYQ"
+  ]
 }
 ```
 
 **Response Example (축약됨):**
 ```json
-{
-  "title": "인스턴트팟 듀오 7-in-1 멀티쿠커",
-  "price": "KRW 117,952",
-  "features": [
-    "압력솥, 슬로쿠커 등 7가지 기능을 하나로 담았습니다.",
-    "버튼 하나로 완성되는 13가지 요리 프로그램 제공"
-  ],
-  "full_description": "인스턴트팟 듀오는 빠르고 편리한 조리를 돕는 스마트 멀티쿠커입니다...",
-  
-  "images": [ // 메인 갤러리 (고화질)
-    "https://m.media-amazon.com/images/I/41OFXY6pMRL.jpg",
-    "https://m.media-amazon.com/images/I/51uTO5fYDzL.jpg"
-  ],
-  "brand_story_images": [ // 브랜드 스토리
-    "https://m.media-amazon.com/images/I/71Vzpy79kIL.jpg"
-  ],
-  "manufacturer_images": [ // 제조사 상세
-    "https://m.media-amazon.com/images/S/aplus-media-library-service-media/6bed2cc4.jpg"
-  ],
-  
-  "usage": {
-    "prompt_tokens": 4200,
-    "completion_tokens": 2500,
-    "total_tokens": 6700
+[
+  {
+    "title": "인스턴트팟 듀오 7-in-1 멀티쿠커",
+    "price": "KRW 117,952",
+    "features": [
+      "압력솥, 슬로쿠커 등 7가지 기능을 하나로 담았습니다.",
+      "버튼 하나로 완성되는 13가지 요리 프로그램 제공"
+    ],
+    "full_description": "인스턴트팟 듀오는 빠르고 편리한 조리를 돕는 스마트 멀티쿠커입니다...",
+    
+    "images": [
+      "https://m.media-amazon.com/images/I/41OFXY6pMRL.jpg",
+      "https://m.media-amazon.com/images/I/51uTO5fYDzL.jpg"
+    ],
+    "brand_story_images": [
+      "https://m.media-amazon.com/images/I/71Vzpy79kIL.jpg"
+    ],
+    "manufacturer_images": [
+      "https://m.media-amazon.com/images/S/aplus-media-library-service-media/6bed2cc4.jpg"
+    ],
+    
+    "usage": {
+      "prompt_tokens": 4200,
+      "completion_tokens": 2500,
+      "total_tokens": 6700
+    }
+  },
+  {
+    "title": "두 번째 상품 제목...",
+    "price": "$25.99",
+    ...
   }
-}
+]
 ```
 
 ---

@@ -2,7 +2,7 @@ from typing import List, Optional, Union, Dict, Any
 from pydantic import BaseModel, HttpUrl, Field
 
 class ProductRequest(BaseModel):
-    url: HttpUrl = Field(..., description="The Amazon product URL to crawl")
+    urls: List[HttpUrl] = Field(..., description="List of Amazon product URLs to crawl")
 
 class ProductResponse(BaseModel):
     title: str = Field(..., description="Product title")
