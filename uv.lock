@@ -18,6 +18,7 @@ dependencies = [
     { name = "langchain-aws" },
     { name = "langchain-core" },
     { name = "langgraph" },
+    { name = "langserve" },
     { name = "playwright" },
     { name = "pydantic" },
     { name = "python-dotenv" },
@@ -34,6 +35,7 @@ requires-dist = [
     { name = "langchain-aws" },
     { name = "langchain-core" },
     { name = "langgraph" },
+    { name = "langserve" },
     { name = "playwright" },
     { name = "pydantic" },
     { name = "python-dotenv" },
@@ -451,6 +453,21 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/c3/0f/ed0634c222eed48a31ba48eab6881f94ad690d65e44fe7ca838240a260c1/langgraph_sdk-0.3.3.tar.gz", hash = "sha256:c34c3dce3b6848755eb61f0c94369d1ba04aceeb1b76015db1ea7362c544fb26", size = 130589, upload-time = "2026-01-13T00:30:43.894Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/6e/be/4ad511bacfdd854afb12974f407cb30010dceb982dc20c55491867b34526/langgraph_sdk-0.3.3-py3-none-any.whl", hash = "sha256:a52ebaf09d91143e55378bb2d0b033ed98f57f48c9ad35c8f81493b88705fc7b", size = 67021, upload-time = "2026-01-13T00:30:42.264Z" },
+]
+
+[[package]]
+name = "langserve"
+version = "0.3.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "httpx" },
+    { name = "langchain-core" },
+    { name = "orjson" },
+    { name = "pydantic" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/fb/57/f2f8ab6b81fb20ad0a5a4ea25a7b7e117dee7790f9cf416228372997d611/langserve-0.3.3.tar.gz", hash = "sha256:2d0f74fb8e633e98fdbd5038fe9774a9dcf136e5c779aa9c6475ac26b5c88d0a", size = 1141255, upload-time = "2025-10-17T15:08:37.176Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7f/6d/45fe028f3ca74af99d51eed55a8158f79ced8b2a46aae681315d6476b556/langserve-0.3.3-py3-none-any.whl", hash = "sha256:fac3bb70293b55e87ba27ddcf2d577b5f3bed3fc1b282f978af0b7fbe5ae8578", size = 1173205, upload-time = "2025-10-17T15:08:35.661Z" },
 ]
 
 [[package]]

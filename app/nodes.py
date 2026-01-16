@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
-from langchain_aws import ChatBedrock
+# from langchain_aws import ChatBedrock # (Optional) Not needed if using RemoteRunnable exclusively, but safe to keep or comment out
+from langserve import RemoteRunnable
 from langchain_core.messages import HumanMessage
 from typing import TypedDict, Optional
 from app.models import ProductResponse
@@ -183,12 +184,22 @@ def extract_with_llm(state: GraphState) -> GraphState:
     # I will try to use a model ID that reflects the intent of "latest/best". 
     # IF "4.5" is not real yet, I will use the latest 3.5 V2.
     # Switching to Claude 3 Haiku (Stable & Ultra Cheap)
-    model_id = "anthropic.claude-3-haiku-20240307-v1:0"  
+    # --- CHANGED: Use Remote API via RemoteRunnable ---
+    # The company API endpoint: https://stag-pawn-python.api.plto.com/bedrock/invoke
+    # RemoteRunnable usually takes the base URL without /invoke if standard LangServe, but can also work with direct invoke URL depending on version.
+    # Standard LangServe: client = RemoteRunnable("http://.../chain") -> calls /chain/invoke
+    # User URL: .../bedrock/invoke. So base should be .../bedrock
     
-    llm = ChatBedrock(
-        model_id=model_id,
-        model_kwargs={"temperature": 0, "max_tokens": 8192},
+    # 1. Base Connection
+    base_llm = RemoteRunnable(
+        url="https://stag-pawn-python.api.plto.com/bedrock",
+        headers={"x-api-key": "MY_SECRET_COMPANY_KEY_1234"}
     )
+    
+    # 2. Configure Model
+    # Using Haiku for cost-effectiveness. 
+    # To use Sonnet, change to: "anthropic.claude-3-sonnet-20240229-v1:0"
+    llm = base_llm.with_config(configurable={"model_id": "anthropic.claude-3-haiku-20240307-v1:0"})
     
     prompt = f"""
     You are an expert scraping assistant. Extract comprehensive product information.

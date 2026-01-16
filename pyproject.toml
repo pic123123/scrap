@@ -16,7 +16,8 @@ dependencies = [
     "fake-useragent",
     "pydantic",
     "python-dotenv",
-    "playwright"
+    "playwright",
+    "langserve"
 ]
 
 [tool.uv]
